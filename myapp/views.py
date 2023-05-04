@@ -16,3 +16,12 @@ def GetBook(request):
         return Response(mydata.data)
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def CreateBook(request):
+    mydata = BookSerializer(data=request.data)
+    if(mydata.is_valid()):
+        mydata.save()
+        return Response(mydata.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
